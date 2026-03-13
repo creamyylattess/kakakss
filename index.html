@@ -1,161 +1,218 @@
-<!doctype html>
-<html lang="id" class="h-full">
+<!DOCTYPE html>
+<html lang="id">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Happy Birthday</title>
- <script src="https://cdn.tailwindcss.com/3.4.17"></script>
- <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
- <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { height: 100%; overflow: hidden; font-family: 'Cormorant Garamond', serif; background: #1a1520; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday</title>
 
-  .page { position: absolute; inset: 0; transition: opacity 0.8s ease, transform 0.8s ease; overflow-y: auto; }
-  .page.hidden-page { opacity: 0; pointer-events: none; transform: translateY(30px); }
-  .page.active-page { opacity: 1; pointer-events: all; transform: translateY(0); }
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
 
-  @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes fadeInScale { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
-  @keyframes letterUnfold { from { opacity: 0; transform: perspective(800px) rotateX(-15deg) translateY(30px); } to { opacity: 1; transform: perspective(800px) rotateX(0deg) translateY(0); } }
-  @keyframes heartBeat { 0%,100% { transform: scale(1); } 15% { transform: scale(1.25); } 30% { transform: scale(1); } }
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Cormorant+Garamond&family=Great+Vibes&display=swap" rel="stylesheet">
 
-  .anim-fade-up { animation: fadeInUp 1s ease forwards; }
-  .anim-fade-up-d1 { animation: fadeInUp 1s ease 0.2s forwards; opacity: 0; }
-  .anim-fade-up-d2 { animation: fadeInUp 1s ease 0.4s forwards; opacity: 0; }
-  .anim-fade-up-d3 { animation: fadeInUp 1s ease 0.6s forwards; opacity: 0; }
-  .anim-fade-up-d4 { animation: fadeInUp 1s ease 0.8s forwards; opacity: 0; }
-  .anim-fade-scale { animation: fadeInScale 1.2s ease 0.3s forwards; opacity: 0; }
-  .anim-letter { animation: letterUnfold 1.2s ease forwards; }
-  .anim-heartbeat { animation: heartBeat 1.5s ease infinite; }
+<style>
 
-  .shimmer-text {
-   background: linear-gradient(90deg, #c9a96e, #f5e6c8, #c9a96e);
-   background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-   background-clip: text; animation: shimmer 4s linear infinite;
-  }
-  @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+body{
+background:#1a1520;
+font-family:'Cormorant Garamond',serif;
+overflow:hidden;
+}
 
-  .photo-frame { border: 3px solid rgba(201,169,110,0.4); border-radius: 12px; padding: 6px; background: rgba(201,169,110,0.1); transition: all 0.4s ease; }
-  .photo-frame:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(180,100,100,0.15); }
-  .photo-placeholder { border-radius: 8px; overflow: hidden; aspect-ratio: 3/4; display: flex; align-items: center; justify-content: center; }
+.page{
+position:absolute;
+inset:0;
+display:flex;
+align-items:center;
+justify-content:center;
+transition:all .8s;
+}
 
-  .letter-paper {
-   background: linear-gradient(180deg, #fdf8f0 0%, #faf3e8 50%, #f7efe0 100%);
-   border: 1px solid rgba(201,169,110,0.3); border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-   position: relative; max-width: 520px; width: 100%; padding: 36px 32px;
-  }
-  .letter-paper::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, transparent, #c9a96e, #b85c5c, #c9a96e, transparent); }
+.hidden-page{
+opacity:0;
+pointer-events:none;
+transform:translateY(30px);
+}
 
-  .nav-dot { width: 10px; height: 10px; border-radius: 50%; border: 2px solid rgba(201,169,110,0.5); background: transparent; cursor: pointer; transition: all 0.4s ease; margin: 7px 0; }
-  .nav-dot.active { background: #c9a96e; border-color: #c9a96e; box-shadow: 0 0 12px rgba(201,169,110,0.5); }
+.active-page{
+opacity:1;
+}
 
-  .btn-elegant {
-   display: inline-flex; align-items: center; gap: 8px; padding: 14px 36px; border: 1px solid rgba(201,169,110,0.4);
-   border-radius: 50px; font-size: 16px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
-   cursor: pointer; transition: all 0.4s ease; background: rgba(201,169,110,0.08); color: #d4c4a8;
-  }
-  .btn-elegant:hover { background: rgba(201,169,110,0.2); border-color: #c9a96e; box-shadow: 0 4px 20px rgba(201,169,110,0.2); transform: translateY(-2px); }
- </style>
+.nav-dot{
+width:10px;
+height:10px;
+border-radius:50%;
+border:2px solid rgba(201,169,110,.6);
+}
+
+.nav-dot.active{
+background:#c9a96e;
+}
+
+.btn{
+padding:14px 32px;
+border:1px solid rgba(201,169,110,.5);
+border-radius:40px;
+letter-spacing:2px;
+transition:.3s;
+}
+
+.btn:hover{
+background:rgba(201,169,110,.2);
+transform:translateY(-2px);
+}
+
+.shimmer{
+background:linear-gradient(90deg,#c9a96e,#f5e6c8,#c9a96e);
+background-size:200%;
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:shine 4s linear infinite;
+}
+
+@keyframes shine{
+0%{background-position:-200%}
+100%{background-position:200%}
+}
+
+.letter{
+background:#fdf8f0;
+color:#5a4a3a;
+border-radius:16px;
+padding:36px;
+max-width:520px;
+box-shadow:0 10px 40px rgba(0,0,0,.15);
+}
+
+.photo{
+aspect-ratio:3/4;
+background:linear-gradient(135deg,#2a2030,#342838);
+border-radius:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+color:#c9a96e;
+font-size:12px;
+}
+
+</style>
 </head>
+
 <body>
- <!-- Navigation Dots -->
- <nav id="nav-dots" style="position:fixed; right:24px; top:50%; transform:translateY(-50%); z-index:50; display:flex; flex-direction:column; gap:14px;">
-  <button class="nav-dot active" onclick="goToPage(0)" aria-label="Page 1"></button>
-  <button class="nav-dot" onclick="goToPage(1)" aria-label="Page 2"></button>
-  <button class="nav-dot" onclick="goToPage(2)" aria-label="Page 3"></button>
- </nav>
 
- <!-- PAGE 1: Hero -->
- <main id="page-0" class="page active-page" style="display:flex; align-items:center; justify-content:center; height:100vh; background: radial-gradient(ellipse at 30% 20%, rgba(180,92,92,0.08) 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(201,169,110,0.06) 0%, transparent 50%), #1a1520;">
-  <div style="text-align:center; padding: 24px;">
-   <!-- Crown -->
-   <svg class="anim-fade-up mb-5 mx-auto opacity-70" width="48" height="36" viewBox="0 0 48 36" fill="none">
-    <path d="M4 28L10 8L18 20L24 4L30 20L38 8L44 28" stroke="#c9a96e" stroke-width="1.5"/>
-    <path d="M6 30H42" stroke="#c9a96e" stroke-width="1.5"/>
-    <circle cx="10" cy="8" r="2" fill="#b85c5c" opacity="0.8"/>
-    <circle cx="24" cy="4" r="2.5" fill="#b85c5c" opacity="0.9"/>
-    <circle cx="38" cy="8" r="2" fill="#b85c5c" opacity="0.8"/>
-   </svg>
-   
-   <p id="p1-subtitle" class="anim-fade-up-d1 text-xs uppercase tracking-widest text-[#c9a96e] mb-4" style="font-size:14px; letter-spacing:6px;">Happy Birthday</p>
-   <h1 id="p1-name" class="shimmer-text anim-fade-up-d2" style="font-family:'Great Vibes',cursive; font-size:clamp(48px,10vw,88px); line-height:1.2; margin-bottom:8px;">My Queen</h1>
-   
-   <div class="flex items-center justify-center gap-3 my-5 anim-fade-up-d3">
-    <div class="h-px bg-gradient-to-r from-transparent to-[#c9a96e] w-15"></div>
-    <div class="anim-heartbeat text-[#b85c5c] text-xl">♥</div>
-    <div class="h-px bg-gradient-to-r from-[#c9a96e] to-transparent w-15"></div>
-   </div>
-   
-   <p id="p1-date" class="anim-fade-up-d3 text-lg text-[#d4c4a8] tracking-wider mb-9" style="font-size:18px; letter-spacing:3px;">14 March 2026</p>
-   <div class="anim-fade-up-d4"><button class="btn-elegant" onclick="goToPage(1)"><span>Buka Hadiah</span><i data-lucide="gift" style="width:18px;height:18px;"></i></button></div>
-  </div>
- </main>
+<!-- NAV -->
+<div style="position:fixed;right:24px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:12px;z-index:50">
+<button class="nav-dot active" onclick="go(0)"></button>
+<button class="nav-dot" onclick="go(1)"></button>
+<button class="nav-dot" onclick="go(2)"></button>
+</div>
 
- <!-- PAGE 2: Gallery -->
- <section id="page-1" class="page hidden-page" style="height:100vh; background: radial-gradient(ellipse at 50% 0%, rgba(201,169,110,0.05) 0%, transparent 60%), #1a1520;">
-  <div style="height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:40px 24px;">
-   <p class="anim-fade-up text-xs uppercase tracking-widest text-[#c9a96e] mb-2" style="font-size:13px; letter-spacing:5px;">Galeri Kenangan</p>
-   <h2 style="font-family:'Great Vibes',cursive; font-size:clamp(32px,6vw,52px); color:#f5e6c8; margin-bottom:6px;">Momen Indah</h2>
-   <div class="flex items-center gap-2.5 mb-8">
-    <div class="h-px w-10 bg-gradient-to-r from-transparent to-[#b85c5c]"></div>
-    <span class="text-[#b85c5c]">✦</span>
-    <div class="h-px w-10 bg-gradient-to-r from-[#b85c5c] to-transparent"></div>
-   </div>
+<!-- PAGE 1 -->
+<div id="p0" class="page active-page">
 
-   <!-- PHOTO GRID - GANTI LINK FOTO DI SINI -->
-   <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:16px; max-width:640px; width:100%;">
-    <div class="photo-frame anim-fade-scale" style="animation-delay:0.1s;">
-     <div class="photo-placeholder" style="background:linear-gradient(135deg,#2a2030,#342838);">
-      <div style="text-align:center;">
-       <svg width="40" height="40" viewBox="0 0 40 40" style="opacity:0.4;margin-bottom:8px;"><rect x="4" y="8" width="32" height="24" rx="3" stroke="#c9a96e" stroke-width="1.5" fill="none"/><circle cx="14" cy="18" r="3" stroke="#c9a96e" stroke-width="1.2" fill="none"/><path d="M8 28 L16 22 L22 26 L30 18 L34 24" stroke="#b85c5c" stroke-width="1.2" fill="none"/></svg>
-       <p style="font-size:11px;color:#c9a96e;opacity:0.5;letter-spacing:2px;">FOTO 1</p>
-      </div>
-     </div>
-    </div>
-    <div class="photo-frame anim-fade-scale" style="animation-delay:0.3s;">
-     <div class="photo-placeholder" style="background:linear-gradient(135deg,#2a2030,#342838);">
-      <div style="text-align:center;">
-       <svg width="40" height="40" viewBox="0 0 40 40" style="opacity:0.4;margin-bottom:8px;"><rect x="4" y="8" width="32" height="24" rx="3" stroke="#c9a96e" stroke-width="1.5" fill="none"/><circle cx="14" cy="18" r="3" stroke="#c9a96e" stroke-width="1.2" fill="none"/><path d="M8 28 L16 22 L22 26 L30 18 L34 24" stroke="#b85c5c" stroke-width="1.2" fill="none"/></svg>
-       <p style="font-size:11px;color:#c9a96e;opacity:0.5;letter-spacing:2px;">FOTO 2</p>
-      </div>
-     </div>
-    </div>
-    <div class="photo-frame anim-fade-scale" style="animation-delay:0.5s;">
-     <div class="photo-placeholder" style="background:linear-gradient(135deg,#2a2030,#342838);">
-      <div style="text-align:center;">
-       <svg width="40" height="40" viewBox="0 0 40 40" style="opacity:0.4;margin-bottom:8px;"><rect x="4" y="8" width="32" height="24" rx="3" stroke="#c9a96e" stroke-width="1.5" fill="none"/><circle cx="14" cy="18" r="3" stroke="#c9a96e" stroke-width="1.2" fill="none"/><path d="M8 28 L16 22 L22 26 L30 18 L34 24" stroke="#b85c5c" stroke-width="1.2" fill="none"/></svg>
-       <p style="font-size:11px;color:#c9a96e;opacity:0.5;letter-spacing:2px;">FOTO 3</p>
-      </div>
-     </div>
-    </div>
-    <div class="photo-frame anim-fade-scale" style="animation-delay:0.7s;">
-     <div class="photo-placeholder" style="background:linear-gradient(135deg,#2a2030,#342838);">
-      <div style="text-align:center;">
-       <svg width="40" height="40" viewBox="0 0 40 40" style="opacity:0.4;margin-bottom:8px;"><rect x="4" y="8" width="32" height="24" rx="3" stroke="#c9a96e" stroke-width="1.5" fill="none"/><circle cx="14" cy="18" r="3" stroke="#c9a96e" stroke-width="1.2" fill="none"/><path d="M8 28 L16 22 L22 26 L30 18 L34 24" stroke="#b85c5c" stroke-width="1.2" fill="none"/></svg>
-       <p style="font-size:11px;color:#c9a96e;opacity:0.5;letter-spacing:2px;">FOTO 4</p>
-      </div>
-     </div>
-    </div>
-   </div>
+<div class="text-center">
 
-   <div class="flex gap-4 mt-9">
-    <button class="btn-elegant px-7 py-3" onclick="goToPage(0)"><i data-lucide="arrow-left" style="width:16px;height:16px;"></i><span>Kembali</span></button>
-    <button class="btn-elegant px-7 py-3" onclick="goToPage(2)"><span>Baca Surat</span><i data-lucide="mail" style="width:16px;height:16px;"></i></button>
-   </div>
-  </div>
- </section>
+<p class="tracking-[6px] text-[#c9a96e] text-sm mb-4 uppercase">Happy Birthday</p>
 
- <!-- PAGE 3: Letter -->
- <section id="page-2" class="page hidden-page" style="height:100vh; background: radial-gradient(ellipse at 50% 30%, rgba(180,92,92,0.06) 0%, transparent 60%), #1a1520;">
-  <div style="height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:40px 24px;">
-   <!-- Envelope -->
-   <div class="anim-fade-up mb-4">
-    <svg width="44" height="36" viewBox="0 0 44 36" fill="none" style="opacity:0.6;">
-     <rect x="2" y="6" width="40" height="26" rx="3" stroke="#c9a96e" stroke-width="1.2"/>
-     <path d="M2 6 L22 22 L42 6" stroke="#c9a96e" stroke-width="1.2"/>
-     <circle cx="22" cy="14" r="1.5" fill="#b85c5c" opacity="0.7"/>
-    </svg>
-   </div>
-   
-   <p style="font-size:13px; letter-spacing:5px; text-transform:uppercase; color:#c9a96e; margin-bottom:8px;">Sepucuk Surat
+<h1 class="shimmer text-[70px]" style="font-family:'Great Vibes'">
+My Queen
+</h1>
+
+<p class="text-[#d4c4a8] tracking-[3px] mb-8">15 Juni 2025</p>
+
+<button class="btn text-[#d4c4a8]" onclick="go(1)">
+Buka Hadiah
+</button>
+
+</div>
+
+</div>
+
+<!-- PAGE 2 -->
+<div id="p1" class="page hidden-page">
+
+<div class="text-center">
+
+<p class="text-[#c9a96e] tracking-[5px] uppercase text-sm">Galeri Kenangan</p>
+<h2 class="text-[42px] text-[#f5e6c8]" style="font-family:'Great Vibes'">Momen Indah</h2>
+
+<div class="grid grid-cols-2 gap-4 mt-6 max-w-[400px]">
+
+<div class="photo">FOTO 1</div>
+<div class="photo">FOTO 2</div>
+<div class="photo">FOTO 3</div>
+<div class="photo">FOTO 4</div>
+
+</div>
+
+<div class="flex gap-4 mt-8 justify-center">
+
+<button class="btn text-[#d4c4a8]" onclick="go(0)">Kembali</button>
+<button class="btn text-[#d4c4a8]" onclick="go(2)">read letter</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- PAGE 3 -->
+<div id="p2" class="page hidden-page">
+
+<div class="text-center">
+
+<p class="text-[#c9a96e] tracking-[5px] uppercase text-sm">A letter</p>
+
+<h2 class="text-[36px] text-[#f5e6c8] mb-6" style="font-family:'Great Vibes'">
+Untukmu
+</h2>
+
+<div class="letter">
+
+<p style="font-family:'Great Vibes';font-size:26px;margin-bottom:14px;color:#8b6914">
+Untuk yang tercinta...
+</p>
+
+<p style="line-height:1.8">
+happy birthdayy kakakss 🫰🏻🫶🏻
+</p>
+
+<p style="text-align:right;margin-top:20px;color:#b85c5c;font-family:'Great Vibes';font-size:22px">
+Dengan segenap cinta ♥
+</p>
+
+</div>
+
+<button class="btn text-[#d4c4a8] mt-8" onclick="go(1)">
+Kembali
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+const pages=[p0,p1,p2]
+const dots=document.querySelectorAll('.nav-dot')
+let cur=0
+
+function go(i){
+
+pages[cur].classList.remove('active-page')
+pages[cur].classList.add('hidden-page')
+dots[cur].classList.remove('active')
+
+cur=i
+
+pages[cur].classList.remove('hidden-page')
+pages[cur].classList.add('active-page')
+dots[cur].classList.add('active')
+
+}
+
+lucide.createIcons()
+
+</script>
+
+</body>
+</html>
